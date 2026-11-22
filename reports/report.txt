@@ -1,0 +1,92 @@
+APIGuard Security Assessment Report
+Generated: 2026-11-22T12:49:12.719404+00:00
+Scope: local training API at 127.0.0.1 only
+========================================================================
+
+Endpoint: Public endpoint (control)
+URL: http://127.0.0.1:5000/api/public
+  authentication: PASS (HTTP 200)
+    Evidence: Endpoint is configured as public and returned a successful response.
+  authorization: N/A (HTTP None)
+    Evidence: No cross-account test URL configured.
+  rate_limit: N/A (HTTP None)
+    Evidence: Rate-limit test not enabled for this endpoint.
+  error_leak: PASS (HTTP 200)
+    Evidence: No configured error-leak patterns detected in the response.
+
+Endpoint: Missing authentication demonstration
+URL: http://127.0.0.1:5000/api/lab/no-auth/profile/1
+  authentication: FAIL (HTTP 200)
+    Evidence: Protected endpoint returned a successful response without a token.
+  authorization: N/A (HTTP None)
+    Evidence: No cross-account test URL configured.
+  rate_limit: N/A (HTTP None)
+    Evidence: Rate-limit test not enabled for this endpoint.
+  error_leak: PASS (HTTP 200)
+    Evidence: No configured error-leak patterns detected in the response.
+
+Endpoint: Secure ownership control
+URL: http://127.0.0.1:5000/api/secure/profile/1
+  authentication: PASS (HTTP 401)
+    Evidence: Protected endpoint rejected the unauthenticated request (401).
+  authorization: PASS (HTTP 403)
+    Evidence: Cross-account access was denied (HTTP 403).
+  rate_limit: N/A (HTTP None)
+    Evidence: Rate-limit test not enabled for this endpoint.
+  error_leak: PASS (HTTP 401)
+    Evidence: No configured error-leak patterns detected in the response.
+
+Endpoint: BOLA demonstration
+URL: http://127.0.0.1:5000/api/lab/bola/profile/1
+  authentication: PASS (HTTP 401)
+    Evidence: Protected endpoint rejected the unauthenticated request (401).
+  authorization: FAIL (HTTP 200)
+    Evidence: User B received a successful response for User A's object; possible BOLA.
+  rate_limit: N/A (HTTP None)
+    Evidence: Rate-limit test not enabled for this endpoint.
+  error_leak: PASS (HTTP 401)
+    Evidence: No configured error-leak patterns detected in the response.
+
+Endpoint: Rate-limited endpoint
+URL: http://127.0.0.1:5000/api/lab/limited/ping
+  authentication: PASS (HTTP 401)
+    Evidence: Protected endpoint rejected the unauthenticated request (401).
+  authorization: N/A (HTTP None)
+    Evidence: No cross-account test URL configured.
+  rate_limit: PASS (HTTP 429)
+    Evidence: 20 local lab requests sent; HTTP 429 observed: True; successful responses: 5.
+  error_leak: PASS (HTTP 401)
+    Evidence: No configured error-leak patterns detected in the response.
+
+Endpoint: Endpoint without rate limit (control)
+URL: http://127.0.0.1:5000/api/lab/unlimited/ping
+  authentication: PASS (HTTP 401)
+    Evidence: Protected endpoint rejected the unauthenticated request (401).
+  authorization: N/A (HTTP None)
+    Evidence: No cross-account test URL configured.
+  rate_limit: FAIL (HTTP 200)
+    Evidence: 20 local lab requests sent; HTTP 429 observed: False; successful responses: 20.
+  error_leak: PASS (HTTP 401)
+    Evidence: No configured error-leak patterns detected in the response.
+
+Endpoint: Simulated verbose error
+URL: http://127.0.0.1:5000/api/lab/error-leak
+  authentication: INCONCLUSIVE (HTTP 500)
+    Evidence: Unexpected response for this endpoint configuration: HTTP 500.
+  authorization: N/A (HTTP None)
+    Evidence: No cross-account test URL configured.
+  rate_limit: N/A (HTTP None)
+    Evidence: Rate-limit test not enabled for this endpoint.
+  error_leak: FAIL (HTTP 500)
+    Evidence: Potential internal error details detected: traceback, database(error|exception), (/[A-Za-z0-9_.-]+){2,}
+
+Endpoint: Generic error control
+URL: http://127.0.0.1:5000/api/lab/safe-error
+  authentication: INCONCLUSIVE (HTTP 500)
+    Evidence: Unexpected response for this endpoint configuration: HTTP 500.
+  authorization: N/A (HTTP None)
+    Evidence: No cross-account test URL configured.
+  rate_limit: N/A (HTTP None)
+    Evidence: Rate-limit test not enabled for this endpoint.
+  error_leak: PASS (HTTP 500)
+    Evidence: No configured error-leak patterns detected in the response.

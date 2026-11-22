@@ -1,0 +1,112 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>APIGuard | Cyber Security Console</title>
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;800&family=Share+Tech+Mono&display=swap"
+          rel="stylesheet">
+</head>
+<body>
+
+<div class="grid-bg"></div>
+
+<header class="topbar">
+    <div class="logo">⬡ APIGUARD<span>_</span></div>
+    <div class="system-status">
+        <span class="pulse"></span> LOCAL LAB ACTIVE
+    </div>
+</header>
+
+<main class="container">
+
+    <section class="hero">
+        <p class="eyebrow">// API SECURITY TESTING PLATFORM</p>
+        <h1>CYBER <span>DEFENSE</span><br>CONSOLE</h1>
+        <p class="subtitle">
+            Detect vulnerabilities. Analyze endpoints.
+            Strengthen your API security.
+        </p>
+        <a class="scan-button" href="/api/public">
+            <span>⌁</span> TEST LAB CONNECTION
+        </a>
+    </section>
+
+    <section class="stats">
+        <div class="stat-card">
+            <p>AUTHENTICATION</p>
+            <h2>01</h2>
+            <span>SECURITY MODULE</span>
+        </div>
+        <div class="stat-card">
+            <p>AUTHORIZATION</p>
+            <h2>02</h2>
+            <span>BOLA DETECTION</span>
+        </div>
+        <div class="stat-card">
+            <p>RATE LIMITING</p>
+            <h2>03</h2>
+            <span>TRAFFIC CONTROL</span>
+        </div>
+        <div class="stat-card">
+            <p>ERROR LEAKS</p>
+            <h2>04</h2>
+            <span>RESPONSE ANALYSIS</span>
+        </div>
+    </section>
+
+    <section class="panel">
+        <div class="panel-heading">
+            <h2> SYSTEM MODULES</h2>
+            <span class="live">● READY</span>
+        </div>
+
+        <div class="module">
+            <span class="module-icon">⌘</span>
+            <div>
+                <h3>Authentication Scanner</h3>
+                <p>Checks protected endpoints for missing authentication.</p>
+            </div>
+            <span class="tag">AUTH</span>
+        </div>
+
+        <div class="module">
+            <span class="module-icon">◈</span>
+            <div>
+                <h3>Authorization Analyzer</h3>
+                <p>Checks object ownership in the local BOLA demonstration.</p>
+            </div>
+            <span class="tag">BOLA</span>
+        </div>
+
+        <div class="module">
+            <span class="module-icon">⇧</span>
+            <div>
+                <h3>Rate Limit Monitor</h3>
+                <p>Checks the lab API's request throttling behavior.</p>
+            </div>
+            <span class="tag">RATE</span>
+        </div>
+
+        <div class="module">
+            <span class="module-icon">⌬</span>
+            <div>
+                <h3>Error Disclosure Detector</h3>
+                <p>Looks for sensitive technical details in error responses.</p>
+            </div>
+            <span class="tag">ERROR</span>
+        </div>
+    </section>
+
+    <footer>
+        <p>APIGUARD // CYBERPUNK SECURITY EDITION</p>
+        <p>AUTHORIZED LOCAL LAB TESTING ONLY</p>
+        <p>Made By Umair</p>
+    </footer>
+
+</main>
+</body>
+</html>

@@ -1,0 +1,66 @@
+[
+  {
+    "name": "Public endpoint (control)",
+    "url": "http://127.0.0.1:5000/api/public",
+    "method": "GET",
+    "auth_required": false,
+    "cross_account_url": null,
+    "rate_limit_test": false
+  },
+  {
+    "name": "Missing authentication demonstration",
+    "url": "http://127.0.0.1:5000/api/lab/no-auth/profile/1",
+    "method": "GET",
+    "auth_required": true,
+    "cross_account_url": null,
+    "rate_limit_test": false
+  },
+  {
+    "name": "Secure ownership control",
+    "url": "http://127.0.0.1:5000/api/secure/profile/1",
+    "method": "GET",
+    "auth_required": true,
+    "cross_account_url": "http://127.0.0.1:5000/api/secure/profile/1",
+    "rate_limit_test": false
+  },
+  {
+    "name": "BOLA demonstration",
+    "url": "http://127.0.0.1:5000/api/lab/bola/profile/1",
+    "method": "GET",
+    "auth_required": true,
+    "cross_account_url": "http://127.0.0.1:5000/api/lab/bola/profile/1",
+    "rate_limit_test": false
+  },
+  {
+    "name": "Rate-limited endpoint",
+    "url": "http://127.0.0.1:5000/api/lab/limited/ping",
+    "method": "GET",
+    "auth_required": true,
+    "cross_account_url": null,
+    "rate_limit_test": true
+  },
+  {
+    "name": "Endpoint without rate limit (control)",
+    "url": "http://127.0.0.1:5000/api/lab/unlimited/ping",
+    "method": "GET",
+    "auth_required": true,
+    "cross_account_url": null,
+    "rate_limit_test": true
+  },
+  {
+    "name": "Simulated verbose error",
+    "url": "http://127.0.0.1:5000/api/lab/error-leak",
+    "method": "GET",
+    "auth_required": false,
+    "cross_account_url": null,
+    "rate_limit_test": false
+  },
+  {
+    "name": "Generic error control",
+    "url": "http://127.0.0.1:5000/api/lab/safe-error",
+    "method": "GET",
+    "auth_required": false,
+    "cross_account_url": null,
+    "rate_limit_test": false
+  }
+]

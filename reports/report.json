@@ -1,0 +1,194 @@
+[
+  {
+    "endpoint": "Public endpoint (control)",
+    "url": "http://127.0.0.1:5000/api/public",
+    "authentication": {
+      "verdict": "PASS",
+      "status": 200,
+      "evidence": "Endpoint is configured as public and returned a successful response."
+    },
+    "authorization": {
+      "verdict": "N/A",
+      "status": null,
+      "evidence": "No cross-account test URL configured."
+    },
+    "rate_limit": {
+      "verdict": "N/A",
+      "status": null,
+      "evidence": "Rate-limit test not enabled for this endpoint."
+    },
+    "error_leak": {
+      "verdict": "PASS",
+      "status": 200,
+      "evidence": "No configured error-leak patterns detected in the response."
+    }
+  },
+  {
+    "endpoint": "Missing authentication demonstration",
+    "url": "http://127.0.0.1:5000/api/lab/no-auth/profile/1",
+    "authentication": {
+      "verdict": "FAIL",
+      "status": 200,
+      "evidence": "Protected endpoint returned a successful response without a token."
+    },
+    "authorization": {
+      "verdict": "N/A",
+      "status": null,
+      "evidence": "No cross-account test URL configured."
+    },
+    "rate_limit": {
+      "verdict": "N/A",
+      "status": null,
+      "evidence": "Rate-limit test not enabled for this endpoint."
+    },
+    "error_leak": {
+      "verdict": "PASS",
+      "status": 200,
+      "evidence": "No configured error-leak patterns detected in the response."
+    }
+  },
+  {
+    "endpoint": "Secure ownership control",
+    "url": "http://127.0.0.1:5000/api/secure/profile/1",
+    "authentication": {
+      "verdict": "PASS",
+      "status": 401,
+      "evidence": "Protected endpoint rejected the unauthenticated request (401)."
+    },
+    "authorization": {
+      "verdict": "PASS",
+      "status": 403,
+      "evidence": "Cross-account access was denied (HTTP 403)."
+    },
+    "rate_limit": {
+      "verdict": "N/A",
+      "status": null,
+      "evidence": "Rate-limit test not enabled for this endpoint."
+    },
+    "error_leak": {
+      "verdict": "PASS",
+      "status": 401,
+      "evidence": "No configured error-leak patterns detected in the response."
+    }
+  },
+  {
+    "endpoint": "BOLA demonstration",
+    "url": "http://127.0.0.1:5000/api/lab/bola/profile/1",
+    "authentication": {
+      "verdict": "PASS",
+      "status": 401,
+      "evidence": "Protected endpoint rejected the unauthenticated request (401)."
+    },
+    "authorization": {
+      "verdict": "FAIL",
+      "status": 200,
+      "evidence": "User B received a successful response for User A's object; possible BOLA."
+    },
+    "rate_limit": {
+      "verdict": "N/A",
+      "status": null,
+      "evidence": "Rate-limit test not enabled for this endpoint."
+    },
+    "error_leak": {
+      "verdict": "PASS",
+      "status": 401,
+      "evidence": "No configured error-leak patterns detected in the response."
+    }
+  },
+  {
+    "endpoint": "Rate-limited endpoint",
+    "url": "http://127.0.0.1:5000/api/lab/limited/ping",
+    "authentication": {
+      "verdict": "PASS",
+      "status": 401,
+      "evidence": "Protected endpoint rejected the unauthenticated request (401)."
+    },
+    "authorization": {
+      "verdict": "N/A",
+      "status": null,
+      "evidence": "No cross-account test URL configured."
+    },
+    "rate_limit": {
+      "verdict": "PASS",
+      "status": 429,
+      "evidence": "20 local lab requests sent; HTTP 429 observed: True; successful responses: 5."
+    },
+    "error_leak": {
+      "verdict": "PASS",
+      "status": 401,
+      "evidence": "No configured error-leak patterns detected in the response."
+    }
+  },
+  {
+    "endpoint": "Endpoint without rate limit (control)",
+    "url": "http://127.0.0.1:5000/api/lab/unlimited/ping",
+    "authentication": {
+      "verdict": "PASS",
+      "status": 401,
+      "evidence": "Protected endpoint rejected the unauthenticated request (401)."
+    },
+    "authorization": {
+      "verdict": "N/A",
+      "status": null,
+      "evidence": "No cross-account test URL configured."
+    },
+    "rate_limit": {
+      "verdict": "FAIL",
+      "status": 200,
+      "evidence": "20 local lab requests sent; HTTP 429 observed: False; successful responses: 20."
+    },
+    "error_leak": {
+      "verdict": "PASS",
+      "status": 401,
+      "evidence": "No configured error-leak patterns detected in the response."
+    }
+  },
+  {
+    "endpoint": "Simulated verbose error",
+    "url": "http://127.0.0.1:5000/api/lab/error-leak",
+    "authentication": {
+      "verdict": "INCONCLUSIVE",
+      "status": 500,
+      "evidence": "Unexpected response for this endpoint configuration: HTTP 500."
+    },
+    "authorization": {
+      "verdict": "N/A",
+      "status": null,
+      "evidence": "No cross-account test URL configured."
+    },
+    "rate_limit": {
+      "verdict": "N/A",
+      "status": null,
+      "evidence": "Rate-limit test not enabled for this endpoint."
+    },
+    "error_leak": {
+      "verdict": "FAIL",
+      "status": 500,
+      "evidence": "Potential internal error details detected: traceback, database(error|exception), (/[A-Za-z0-9_.-]+){2,}"
+    }
+  },
+  {
+    "endpoint": "Generic error control",
+    "url": "http://127.0.0.1:5000/api/lab/safe-error",
+    "authentication": {
+      "verdict": "INCONCLUSIVE",
+      "status": 500,
+      "evidence": "Unexpected response for this endpoint configuration: HTTP 500."
+    },
+    "authorization": {
+      "verdict": "N/A",
+      "status": null,
+      "evidence": "No cross-account test URL configured."
+    },
+    "rate_limit": {
+      "verdict": "N/A",
+      "status": null,
+      "evidence": "Rate-limit test not enabled for this endpoint."
+    },
+    "error_leak": {
+      "verdict": "PASS",
+      "status": 500,
+      "evidence": "No configured error-leak patterns detected in the response."
+    }
+  }
+]
